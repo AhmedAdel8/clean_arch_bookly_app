@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:dio/dio.dart';
 
 abstract class Failure {
@@ -11,7 +9,7 @@ abstract class Failure {
 class ServerFailure extends Failure {
   ServerFailure(super.message);
 
-  factory ServerFailure.fromDioError(DioError e) {
+  factory ServerFailure.fromDiorError(DioError e) {
     switch (e.type) {
       case DioErrorType.connectionTimeout:
         return ServerFailure('Connection timeout with api server');
@@ -33,6 +31,7 @@ class ServerFailure extends Failure {
         return ServerFailure('Opps There was an Error, Please try again');
     }
   }
+
   factory ServerFailure.fromResponse(int statusCode, dynamic response) {
     if (statusCode == 404) {
       return ServerFailure('Your request was not found, please try later');
